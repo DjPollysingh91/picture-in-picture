@@ -53,7 +53,8 @@ No.
 **Does this specification allow an origin some measure of control over a user
 agent’s native UI?**
 
-An origin can create a floating video window always on top containing a video.
+An origin can create a floating window always on top containing either a
+video or arbitrary HTML content.
 
 **Does this specification expose temporary identifiers to the web?**
 

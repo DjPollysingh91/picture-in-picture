@@ -32,12 +32,28 @@ spec: HTML; urlPrefix: https://html.spec.whatwg.org/multipage/
             text: triggered by user activation
         urlPrefix: media.html
             text: media element event task source
+        urlPrefix: origin.html
+            text: sandbox propagates to auxiliary browsing contexts flag
+            text: sandboxed auxiliary navigation browsing context flag
+            text: sandboxed document.domain browsing context flag
+            text: sandboxed forms browsing context flag
+            text: sandboxed modals flag
+            text: sandboxed navigation browsing context flag
+            text: sandboxed orientation lock browsing context flag
+            text: sandboxed pointer lock browsing context flag
+            text: sandboxed presentation browsing context flag
+            text: sandboxing flag set
 spec: Remote-Playback; urlPrefix: https://w3c.github.io/remote-playback/#dfn-
     type: dfn
         text: local playback device
         text: local playback state
 spec: Page-Visibility; urlPrefix: https://www.w3.org/TR/page-visibility/
     type: attribute; text: visibilityState; for: Document; url: dom-visibilitystate
+spec: UIEvents-Key; urlPrefix: https://www.w3.org/TR/uievents-key/
+    type: dfn
+        url: #control; text: control characters
+        url: #keys-modifier; text: modifier keys
+        url: #keys-navigation; text: navigation keys
 </pre>
 
 <pre class="link-defaults">
@@ -505,9 +521,35 @@ The `:picture-in-picture` <a>pseudo-class</a> MUST match any <a>element</a>
 
 <em>This section is non-normative.</em>
 
-The API applies only to {{HTMLVideoElement}} in order to start on a minimal
-viable product that has limited security issues. Later versions of this
-specification may allow PIP-ing arbitrary HTML content.
+The {{HTMLVideoElement}} Picture-in-Picture API has limited security issues.
+
+## Restrictions on arbitrary content ## {#arbitrary-content-restrictions}
+
+The <a>Picture-in-Picture browsing context</a> MUST have top-level navigation
+blocked and the following <a>sandboxing flag set</a> applied:
+- <a>sandbox propagates to auxiliary browsing contexts flag</a>
+- <a>sandboxed auxiliary navigation browsing context flag</a>
+- <a>sandboxed document.domain browsing context flag</a>
+- <a>sandboxed forms browsing context flag</a>
+- <a>sandboxed modals flag</a>
+- <a>sandboxed navigation browsing context flag</a>
+- <a>sandboxed orientation lock browsing context flag</a>
+- <a>sandboxed pointer lock browsing context flag</a>
+- <a>sandboxed presentation browsing context flag</a>
+
+If the user agent restricts autoplay then this SHOULD be allowed by default.
+
+If the <a>Picture-in-Picture browsing context</a> is showing
+<a>non-interactive arbitrary content</a> then the user agent MUST not allow
+<a>user interaction</a>.
+
+If the <a>Picture-in-Picture browsing context</a> is showing <a>interactive
+arbitrary content</a> then the user agent MUST allow ANY touch, gesture and
+mouse user input events. The user agent MUST only allow keyboard events from
+the following key tables:
+- <a>control characters</a>
+- <a>modifier keys</a>
+- <a>navigation keys</a>
 
 ## Feature Policy ## {#feature-policy}
 
